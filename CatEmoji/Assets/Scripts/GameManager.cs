@@ -7,7 +7,7 @@ namespace Ketsu
 {
     public class GameManager : MonoBehaviour
     {
-        public float FadeInTime;
+        public float FadeSpeed;
 
         ScreenFaider Faider;
 
@@ -20,18 +20,24 @@ namespace Ketsu
         {
             Faider = ScreenFaider.instance;
             Faider.SetTo(Color.black);
-            Faider.FadeOut(Color.black, FadeInTime, null);
+            Faider.FadeOut(Color.black, FadeSpeed, null);
         }
 
         void Update()
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                Application.Quit();
+                Faider.FadeIn(Color.black, FadeSpeed, delegate
+                {
+                    SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+                });
             }
             else if (Input.GetButtonDown("Fire1"))
             {
-                SceneManager.LoadScene("Main", LoadSceneMode.Single);
+                Faider.FadeIn(Color.black, FadeSpeed, delegate
+                {
+                    SceneManager.LoadScene("Main", LoadSceneMode.Single);
+                });
             }
         }
     }
