@@ -16,11 +16,13 @@ namespace Ketsu
 
         Rigidbody2D rb;
         AudioSource asrc;
+        Animator anim;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             asrc = GetComponent<AudioSource>();
+            anim = GetComponent<Animator>();
         }
 
         void Start()
@@ -40,9 +42,18 @@ namespace Ketsu
 
         public void Boost()
         {
+            anim.SetTrigger("Dead");
             asrc.PlayOneShot(BoostSfx);
-            rb.AddForce(Vector2.right * PushForce * 5);
-            rb.AddTorque(-PushTorque * 5);
+            rb.AddForce(Vector2.right * PushForce * 8);
+            rb.AddTorque(-PushTorque * 8);
+        }
+
+        public void Slow()
+        {
+            anim.SetTrigger("Dead");
+            asrc.PlayOneShot(SlowSfx);
+            rb.AddForce(Vector2.left * PushForce);
+            rb.AddTorque(PushTorque);
         }
 
         public void RandomSound()
@@ -51,13 +62,6 @@ namespace Ketsu
                 asrc.PlayOneShot(IddleSfx);
                 RandomSound();
             });
-        }
-
-        public void Slow()
-        {
-            asrc.PlayOneShot(SlowSfx);
-            rb.AddForce(Vector2.left * PushForce * 2);
-            rb.AddTorque(PushTorque * 2);
         }
 
         public void DelayedAction(float time, Action action)
