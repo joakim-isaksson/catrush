@@ -1,5 +1,3 @@
-/santasworkshop_WwiseProject/.cache
-/santasworkshop_WwiseProject/Originals
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -19,7 +17,6 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-
 
 # Unity3D generated meta files
 *.pidb.meta
